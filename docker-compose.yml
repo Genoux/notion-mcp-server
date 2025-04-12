@@ -4,3 +4,9 @@ services:
     stdin_open: true
     tty: true
     restart: unless-stopped
+    volumes:
+      - ./scripts/notion-openapi.json:/usr/local/scripts/notion-openapi.json
+    env_file:
+      - .env
+    environment:
+      - 'OPENAPI_MCP_HEADERS={"Authorization": "Bearer ${NOTION_TOKEN}", "Notion-Version": "${NOTION_API_VERSION:-2022-06-28}"}'
